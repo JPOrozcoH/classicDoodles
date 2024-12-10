@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+body {
+    background-color: #151110;
+    color: #fefefe;
+    font-family: monospace;
+    font-size: 3vmin;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.text {
+    width: 90vmin;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vmin;
+    margin-bottom: 1vmin;
+}
+
+#game {
+    width: 90vmin;
+    height: 90vmin;
+    border: 1vmin solid #fefefe;
+    position: relative;
+}
+
+.game.paused::before {
+   content: "Press ANY ARROW to start !"; 
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}

@@ -1,138 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>SNAKE GAME</title>
-    <link rel="shortcut icon" href="snake.png">
-  </head>
-  <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <style>
-      body {
-        background-color: black;
-      }
-      canvas {
-        background-color: white;
-        display: block;
-        margin: auto;
-        border: 1px solid white;
-      }
-    </style>
-    <script>
-      const canvas = document.getElementById('gameCanvas');
-      const context = canvas.getContext('2d');
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Snake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="text">
+            <span id="title">Classic Snake</span>
+            <span id="score">Score : 0</span>
+        </div>
+        <div class="game paused">
+            <canvas id="game" width="1210" height="1210"></canvas>
+        </div>
+    </div>
 
-      const gridSize = 25;
-      const tileCountX = canvas.width / gridSize;
-      const tileCountY = canvas.height / gridSize;
-
-      let snakeX = 10;
-      let snakeY = 10;
-      let appleX = 15;
-      let appleY = 15;
-      let velocityX = 0;
-      let velocityY = 0;
-
-      const trail = [];
-      let tailLength = 5;
-
-      // Add a score variable
-      let score = 0;
-
-      window.onload = function() {
-        document.addEventListener('keydown', keyDownEvent);
-        setInterval(gameLoop, 1000 / 8);
-      };
-
-      function gameLoop() {
-        update();
-        draw();
-      }
-
-      function update() {
-        snakeX += velocityX;
-        snakeY += velocityY;
-
-        if (snakeX < 0) {
-          snakeX = tileCountX - 1;
-        }
-        if (snakeX > tileCountX - 1) {
-          snakeX = 0;
-        }
-        if (snakeY < 0) {
-          snakeY = tileCountY - 1;
-        }
-        if (snakeY > tileCountY - 1) {
-          snakeY = 0;
-        }
-
-        trail.forEach((segment) => {
-          if (segment.x === snakeX && segment.y === snakeY) {
-            tailLength = 5;
-          }
-        });
-
-      trail.push({ x: snakeX, y: snakeY });
-
-      while (trail.length > tailLength) {
-      trail.shift();
-      }
-
-      if (appleX === snakeX && appleY === snakeY) {
-      tailLength++;
-      score++; // Increase score by one
-      appleX = Math.floor(Math.random() * tileCountX);
-      appleY = Math.floor(Math.random() * tileCountY);
-      }
-      }
-
-      function draw() {
-      context.fillStyle = 'black';
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      context.fillStyle = 'lime';
-      trail.forEach((segment) => {
-      context.fillRect(
-      segment.x * gridSize,
-      segment.y * gridSize,
-      gridSize -2,
-      gridSize -2
-      );
-      });
-
-      context.fillStyle='red';
-      context.fillRect(
-      appleX * gridSize,
-      appleY * gridSize,
-      gridSize -2,
-      gridSize -2
-      );
-
-      // Draw the score on the canvas
-      context.fillStyle='white';
-      context.font='20px sans-serif';
-      context.fillText(`SCORE: ${score}`,10,30);
-      }
-
-      function keyDownEvent(event) {
-      switch(event.keyCode) {
-      case(37):
-      velocityX=-1;
-      velocityY=0;
-      break;
-      case(38):
-      velocityX=0;
-      velocityY=-1;
-      break;
-      case(39):
-      velocityX=1;
-      velocityY=0;
-      break;
-      case(40):
-      velocityX=0;
-      velocityY=1;
-      break;
-      }
-      }
-    </script>
-  </body>
+</body>
+<script src="script.js"></script>
 </html>
